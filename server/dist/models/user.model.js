@@ -5,13 +5,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _express = require("express");
-
-var _v = _interopRequireDefault(require("./v1"));
+var _mongoose = _interopRequireDefault(require("mongoose"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var router = (0, _express.Router)();
-router.use('/api', _v["default"]);
-var _default = router;
+var User = _mongoose["default"].model('User', new _mongoose["default"].Schema({
+  username: String,
+  password: String,
+  email: String
+}));
+
+var _default = User;
 exports["default"] = _default;

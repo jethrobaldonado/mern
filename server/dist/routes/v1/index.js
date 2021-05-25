@@ -7,11 +7,14 @@ exports["default"] = void 0;
 
 var _express = require("express");
 
-var _v = _interopRequireDefault(require("./v1"));
+var _users = _interopRequireDefault(require("./users"));
+
+var _posts = _interopRequireDefault(require("./posts"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var router = (0, _express.Router)();
-router.use('/api', _v["default"]);
-var _default = router;
+var v1Router = (0, _express.Router)();
+v1Router.use('/v1/users', _users["default"]);
+v1Router.use('/v1/posts', _posts["default"]);
+var _default = v1Router;
 exports["default"] = _default;
