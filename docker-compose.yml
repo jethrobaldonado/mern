@@ -7,3 +7,35 @@ services:
       - 8082:8082
     volumes:
       - "./server:/usr/src/app"
+    networks:
+      - app-network
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./db:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - app-network
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: client
+    command: npm start
+    volumes:
+      - ./client/:/user/app
+      - /usr/app/node_modules
+    depends_on:
+      - api
+    ports:
+      - "1337:3000"
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
